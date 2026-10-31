@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5bhjtlc724uc"
-path="res://.godot/imported/000.png-c30db74601775d539d501ae83f97d744.ctex"
+uid="uid://dj5s6uama8dl0"
+path="res://.godot/imported/002.png-418cb39b51219b81317e996d820d9c7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trees/slate_spruce/000.png"
-dest_files=["res://.godot/imported/000.png-c30db74601775d539d501ae83f97d744.ctex"]
+source_file="res://assets/plants/slate_spruce/002.png"
+dest_files=["res://.godot/imported/002.png-418cb39b51219b81317e996d820d9c7d.ctex"]
 
 [params]
 

@@ -1,0 +1,137 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3ppjt6ytnhe3"]
+
+[ext_resource type="Texture2D" uid="uid://4cmke6gsajfd" path="res://icon.svg" id="1_nm6mk"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1yjpo"]
+texture = ExtResource("1_nm6mk")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0y2sr"]
+sources/0 = SubResource("TileSetAtlasSource_1yjpo")
+
+[sub_resource type="GDScript" id="GDScript_glokq"]
+script/source = "extends TileMap
+
+const worlds_gen = preload(\"res://scripts/world_gen.gd\")
+
+var world = worlds_gen.new()
+
+func _ready() -> void:
+	gen(\"heat\")
+
+func gen(value) -> void:
+	add_child(world)
+
+	for x in range(world.Width):
+		for y in range(world.Height):
+			var _at_pos
+			if value == \"heat\":
+				_at_pos = world.get_heat(x, y)
+			elif value == \"humidity\":
+				_at_pos = world.get_altitude(x, y)
+			elif value == \"alt\":
+				_at_pos = world.get_humidity(x, y)
+
+			if _at_pos < 0:
+				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
+			else:
+				set_cell(0, Vector2i(x, y), 0, Vector2i(4, 2))
+
+func _on_button_pressed() -> void:
+	gen($\"../OptionButton\".selected)
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_0y2sr")
+format = 2
+script = SubResource("GDScript_glokq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(-0.325, -0.325)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 85.0
+offset_top = 421.0
+offset_right = 225.0
+offset_bottom = 521.0
+text = "BUTTON"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+offset_left = 437.0
+offset_top = 426.0
+offset_right = 708.0
+offset_bottom = 531.0
+item_count = 3
+popup/item_0/text = "heat"
+popup/item_0/id = 0
+popup/item_1/text = "humidity"
+popup/item_1/id = 1
+popup/item_2/text = "alt"
+popup/item_2/id = 2
+
+[connection signal="pressed" from="Button" to="TileMap" method="_on_button_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dif3t5u7woosn"
-path="res://.godot/imported/001.png-1824e0f9f9533299668d39dd7dabc02b.ctex"
+uid="uid://b45jv01a68p4y"
+path="res://.godot/imported/000.png-d78642a213194352289d60854159f46c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trees/blue_alder/001.png"
-dest_files=["res://.godot/imported/001.png-1824e0f9f9533299668d39dd7dabc02b.ctex"]
+source_file="res://assets/plants/almond_pine/000.png"
+dest_files=["res://.godot/imported/000.png-d78642a213194352289d60854159f46c.ctex"]
 
 [params]
 

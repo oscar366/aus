@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbkk7onspl7cp"]
-
-[ext_resource type="Script" uid="uid://dce63432nyn1w" path="res://scripts/world_gen.gd" id="1_syqki"]
-
-[node name="WorldGen" type="Node2D"]
-script = ExtResource("1_syqki")

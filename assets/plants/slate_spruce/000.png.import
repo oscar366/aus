@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bplt4ilinb72o"
-path="res://.godot/imported/002.png-9484d53c929d5dea9794b20bd4399eaa.ctex"
+uid="uid://5bhjtlc724uc"
+path="res://.godot/imported/000.png-f0889a60a3ca8feba107543c57ef1fc8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trees/blue_alder/flowering/002.png"
-dest_files=["res://.godot/imported/002.png-9484d53c929d5dea9794b20bd4399eaa.ctex"]
+source_file="res://assets/plants/slate_spruce/000.png"
+dest_files=["res://.godot/imported/000.png-f0889a60a3ca8feba107543c57ef1fc8.ctex"]
 
 [params]
 

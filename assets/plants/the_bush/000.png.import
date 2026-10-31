@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj5s6uama8dl0"
-path="res://.godot/imported/002.png-4077c5624cfac648d6b3ff54a80853c5.ctex"
+uid="uid://b2h88x4odgetp"
+path="res://.godot/imported/000.png-241dd3369ed2d050b189d494b5872293.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trees/slate_spruce/002.png"
-dest_files=["res://.godot/imported/002.png-4077c5624cfac648d6b3ff54a80853c5.ctex"]
+source_file="res://assets/plants/the_bush/000.png"
+dest_files=["res://.godot/imported/000.png-241dd3369ed2d050b189d494b5872293.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj02os8big54j"
-path="res://.godot/imported/002.png-39b0285735cba5d177694fe3128429cc.ctex"
+uid="uid://dif3t5u7woosn"
+path="res://.godot/imported/001.png-9daff2b56b766def3be58cae9b069486.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trees/blue_alder/fall/002.png"
-dest_files=["res://.godot/imported/002.png-39b0285735cba5d177694fe3128429cc.ctex"]
+source_file="res://assets/plants/blue_alder/001.png"
+dest_files=["res://.godot/imported/001.png-9daff2b56b766def3be58cae9b069486.ctex"]
 
 [params]
 

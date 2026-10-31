@@ -1,0 +1,168 @@
+[gd_scene load_steps=7 format=3 uid="uid://cofmi6pp86urk"]
+
+[ext_resource type="Texture2D" uid="uid://dvxt4koqpjodt" path="res://assets/others/tileset1.png" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://6xfxvnwfpvd8" path="res://scripts/tilemap_worldgen.gd" id="2_0wfyh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
+texture = ExtResource("1_o5qli")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:0/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+7:7/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sugp2"]
+sources/0 = SubResource("TileSetAtlasSource_0wfyh")
+
+[sub_resource type="GDScript" id="GDScript_0wfyh"]
+resource_name = "cameraMovement"
+script/source = "extends Camera2D
+
+@export var speed: float = 500.0
+
+func _process(delta: float) -> void:
+	var direction = Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
+
+	position += direction * speed * delta
+"
+
+[sub_resource type="GDScript" id="GDScript_sugp2"]
+resource_name = "tilemap_debug_tools"
+script/source = "extends Control
+
+@onready var tile_map: TileMapLayer = $\"../../../TileMap\"
+
+@onready var pos_label: Label = $Pos
+@onready var alt_label: Label = $biomeValues/alt
+@onready var heat_label: Label = $biomeValues/heat
+@onready var humadty_label: Label = $biomeValues/humadty
+@onready var soil_comp_label: Label = $biomeValues/soilComp
+@onready var biome_label: Label = $biomeValues/biome
+
+const worlds_gen = preload(\"res://scripts/world_gen.gd\")
+
+var worldgen = worlds_gen.new()
+
+func _ready() -> void:
+	add_child(worldgen)
+	pos_label.hide()
+	alt_label.hide()
+	heat_label.hide()
+	humadty_label.hide()
+	soil_comp_label.hide()
+	biome_label.hide()
+	pos_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func _process(_delta: float) -> void:
+	if not is_instance_valid(tile_map):
+		return
+
+	var mouse_global = get_global_mouse_position()
+	var mouse_local = tile_map.to_local(mouse_global)
+	var tile_pos = tile_map.local_to_map(mouse_local)
+
+	if tile_map.get_cell_source_id(tile_pos) == -1:
+		pos_label.show()
+		alt_label.show()
+		heat_label.show()
+		humadty_label.show()
+		soil_comp_label.show()
+		biome_label.show()
+		return
+
+	pos_label.text = \"Tile: %d, %d\" % [tile_pos.x, tile_pos.y]
+	alt_label.text = \"ALT: \" + str(round(worldgen.get_altitude(tile_pos.x,tile_pos.y)*10))
+	heat_label.text = \"HEAT: \" + str(round(worldgen.get_heat(tile_pos.x,tile_pos.y)*10))
+	humadty_label.text = \"HUMADTY: \" + str(round(worldgen.get_humidity(tile_pos.x,tile_pos.y)*10))
+	soil_comp_label.text = \"SOIL PUREATY: \" + str(round(worldgen.get_soilcomp(tile_pos.x,tile_pos.y)*10))
+	biome_label.text = \"BIOME: \" + worldgen.get_biome(tile_pos.x,tile_pos.y)
+	#pos_label.position = get_local_mouse_position() + Vector2(16, 16)
+	pos_label.show()
+	alt_label.show()
+	heat_label.show()
+	humadty_label.show()
+	soil_comp_label.show()
+	biome_label.show()
+	
+"
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_sugp2")
+script = ExtResource("2_0wfyh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.51, 1.51)
+script = SubResource("GDScript_0wfyh")
+
+[node name="DebugGUI" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -575.0
+offset_top = -323.0
+offset_right = -535.0
+offset_bottom = -283.0
+
+[node name="tilemapThings" type="Control" parent="Camera2D/DebugGUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_sugp2")
+
+[node name="Pos" type="Label" parent="Camera2D/DebugGUI/tilemapThings"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 109.0
+offset_right = 234.0
+offset_bottom = 132.0
+
+[node name="biomeValues" type="Control" parent="Camera2D/DebugGUI/tilemapThings"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="alt" type="Label" parent="Camera2D/DebugGUI/tilemapThings/biomeValues"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 139.0
+offset_right = 233.0
+offset_bottom = 162.0
+
+[node name="heat" type="Label" parent="Camera2D/DebugGUI/tilemapThings/biomeValues"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 169.0
+offset_right = 234.0
+offset_bottom = 192.0
+
+[node name="humadty" type="Label" parent="Camera2D/DebugGUI/tilemapThings/biomeValues"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 195.0
+offset_right = 234.0
+offset_bottom = 218.0
+
+[node name="soilComp" type="Label" parent="Camera2D/DebugGUI/tilemapThings/biomeValues"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 215.0
+offset_right = 235.0
+offset_bottom = 238.0
+
+[node name="biome" type="Label" parent="Camera2D/DebugGUI/tilemapThings/biomeValues"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
